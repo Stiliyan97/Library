@@ -6,6 +6,10 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Noto Serif", serif;
+}
+
 
 .wrapper {
     height: 100vh;
@@ -40,8 +44,37 @@
 .add-book-form {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    align-items: center;
 }
+
+.add-book-form > input,
+.add-book-form > button {
+    margin-bottom: 1rem;
+}
+
+.add-book-form > input {
+    width: 15rem;
+    padding: 0.3rem;
+    background-color: #E6B093;
+    border: 1px solid #E6B093;
+    border-radius: 5rem;
+}
+
+.add-book-form > label {
+    margin-bottom: 0.4rem;
+}
+
+.add-book-form > button {
+    border: 1px solid white;
+    background-color: white;
+    box-shadow: 10px 0px 0px 0px #D6C229;;
+    border-radius: 0.5rem;
+    width: 10rem;
+    padding: 1rem;
+    font-weight: 800;
+    font-size: 1rem;
+}
+
 
 .book-display {
     border: 3px solid greenyellow;
