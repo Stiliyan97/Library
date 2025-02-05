@@ -25,6 +25,8 @@ body {
     gap: 1rem;
     align-items: center;
     background-color: #F39B6D;
+    font-weight: 800;
+    font-size: 1.5rem;
 }
 
 .header > img {
@@ -53,8 +55,8 @@ body {
 .add-book-form > input {
     width: 15rem;
     padding: 0.3rem;
-    background-color: #E6B093;
-    border: 1px solid #E6B093;
+    background-color: #BBBBBB;
+    border: 1px solid #BBBBBB;
     border-radius: 5rem;
 }
 
@@ -77,7 +79,7 @@ body {
 .book-display {
     background-color: #BBBBBB;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
     justify-content: center;
     align-items: start;
     gap: 2rem 1rem;
@@ -93,7 +95,9 @@ body {
     align-items: center;
     gap: 0.5rem;
     padding: 2rem;
-    box-shadow: 0px 1rem 0px 0px #E6B093;
+    box-shadow: 0px 1rem 0px 0px #F39B6D;
+    font-weight: 800;
+    font-size: 0.9rem;
 }
 
 .book-card > img {
@@ -105,19 +109,29 @@ body {
 }
 
 .status-display.read {
-    background-color: green;
+    border: 0.3rem dashed green;
+    padding: 0.5rem 3rem;
+    margin-top: 1rem;
 }
 
 .book-card-btns {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    gap: 4rem;
     margin-top: 1rem
 }
 
 .book-card-btns > button {
     border-radius: 0.5rem;
-    border: 1px solid #E6B093;
-    padding: 0.4rem 1rem;
-    background-color: #E6B093;
+    border: 1px solid #F39B6D;
+    padding: 0.8rem 2rem;
+    background-color: #F39B6D;
+    font-weight: 800;
+}
+
+.book-card-btns > button:nth-child(1) {
+    box-shadow: 0.5rem 0rem 0rem 0rem #3E6990;;
+}
+
+.book-card-btns > button:nth-child(2) {
+    box-shadow: 0.5rem 0rem 0rem 0rem firebrick;
 }
