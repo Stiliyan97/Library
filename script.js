@@ -2,7 +2,7 @@
 
 // my book constructor and array where I will store books
 
-const myLibrary = [];
+let myLibrary = [];
 
 const idCollection = [];
 
@@ -22,6 +22,10 @@ function addBookToArray() {
     const bookTitle = document.getElementById("book-title").value;
     const bookAuthor = document.getElementById("book-author").value;
     const bookPages = parseInt(document.getElementById("book-pages").value);
+
+    if (bookTitle === "" || bookAuthor === "" || isNaN(bookPages)) {
+        return;
+    }
     const bookStatus = "Not Read";
     let bookId = 0;
 
@@ -44,23 +48,6 @@ function addBookToArray() {
     document.getElementById("book-pages").value = "";
 }
 
-// I am adding event listner to my add book button
-
-const addBookBtn = document.getElementById("add-book-btn");
-addBookBtn.addEventListener("click", addBookToLibrary)
-
-console.log(addBookBtn);
-
-// This function runs the addBookToArray by clicking on button
- 
-function addBookToLibrary(e) {
-    e.preventDefault();
-    
-    addBookToArray();
-    
-    console.log(myLibrary);
-}
-
 // This func checks if book exist in array already
 
 function checkBooksDisplayStatus(arrayBookId) {
@@ -71,8 +58,6 @@ function checkBooksDisplayStatus(arrayBookId) {
     bookCards.forEach(li => {
         const liText = li.textContent;
         const currentLiBookID = parseInt(liText.slice(liText.length - 1));
-        console.log(currentLiBookID);
-        console.log(bookId);
         if (bookId === currentLiBookID) {
             isBookDisplayed = true;
         }
@@ -80,6 +65,8 @@ function checkBooksDisplayStatus(arrayBookId) {
 
     return isBookDisplayed;
 }
+
+//This func changes the book cards status
 
 function changeBookStatus(e) {
     e.preventDefault();
@@ -99,6 +86,24 @@ function changeBookStatus(e) {
     
 }
 
+// ThIS func will delete books from array and display 
+
+function deleteBook(e) {
+    e.preventDefault();
+
+    const currentBookCard = e.target.parentElement.parentElement;
+    const currentBookIdText = e.target
+                            .parentElement
+                            .previousSibling
+                            .previousSibling
+                            .children[3].textContent;
+    
+    const currentBookId = parseInt(currentBookIdText.slice(currentBookIdText.length - 1));
+    
+    myLibrary = myLibrary.filter(book => book.id !== currentBookId);
+
+    currentBookCard.remove();    
+}
 
 // This function adds the new book to the display
 
@@ -163,6 +168,7 @@ function addBooksToDisplay() {
         statusBtn.addEventListener("click", changeBookStatus);
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
+        deleteBtn.addEventListener("click", deleteBook);
         btnsDiv.appendChild(statusBtn);
         btnsDiv.appendChild(deleteBtn);
         bookCardDiv.appendChild(btnsDiv);
@@ -171,15 +177,23 @@ function addBooksToDisplay() {
     });
 }
 
-//This is the display button with eventlistener
+// I am adding event listner to my add book button
 
-const displayBookbtn = document.getElementById("display-book-btn");
-displayBookbtn.addEventListener("click", displayBookToLibrary)
+const addBookBtn = document.getElementById("add-book-btn");
+addBookBtn.addEventListener("click", addBookToLibrary)
 
-// This function runs the addBooksToDisplay by clicking on button
 
-function displayBookToLibrary (e) {
+// This function runs the addBookToArray by clicking on button
+ 
+function addBookToLibrary(e) {
     e.preventDefault();
+    
+    addBookToArray();
     addBooksToDisplay();
 }
+
+
+
+
+
 
