@@ -61,6 +61,44 @@ function addBookToLibrary(e) {
     console.log(myLibrary);
 }
 
+// This func checks if book exist in array already
+
+function checkBooksDisplayStatus(arrayBookId) {
+    const bookId = arrayBookId;
+    let bookCards = Array.from(document.querySelectorAll(".book-id"));
+    let isBookDisplayed = false;
+
+    bookCards.forEach(li => {
+        const liText = li.textContent;
+        const currentLiBookID = parseInt(liText.slice(liText.length - 1));
+        console.log(currentLiBookID);
+        console.log(bookId);
+        if (bookId === currentLiBookID) {
+            isBookDisplayed = true;
+        }
+    });
+
+    return isBookDisplayed;
+}
+
+function changeBookStatus(e) {
+    e.preventDefault();
+
+    const statusPara = e.target.parentElement.previousSibling;
+    const statusParaText = statusPara.textContent;
+    if (statusParaText === "Not read"){
+        e.target.parentElement.previousSibling.textContent = "In progress";
+        statusPara.classList.replace("not-read", "in-progress");
+    } else if (statusParaText === "In progress") {
+        e.target.parentElement.previousSibling.textContent = "read";
+        statusPara.classList.replace("in-progress", "read");
+    } else {
+        e.target.parentElement.previousSibling.textContent = "Not read";
+        statusPara.classList.replace("read", "not-read");
+    }
+    
+}
+
 
 // This function adds the new book to the display
 
@@ -71,6 +109,10 @@ function addBooksToDisplay() {
     
     
     myLibrary.forEach(book => {
+
+        if(checkBooksDisplayStatus(book.id)){
+            return;
+        }
         // creates the book-card div and adds the class
         const bookCardDiv = document.createElement("div");
         bookCardDiv.classList.add("book-card");
@@ -110,7 +152,7 @@ function addBooksToDisplay() {
         const displayStatusPara = document.createElement("p");
         displayStatusPara.textContent = "Not read";
         displayStatusPara.classList.add("status-display");
-        displayStatusPara.classList.add("read");
+        displayStatusPara.classList.add("not-read");
         bookCardDiv.appendChild(displayStatusPara);
 
         //creates the div and appends it to the book-card div
@@ -118,6 +160,7 @@ function addBooksToDisplay() {
         btnsDiv.classList.add("book-card-btns");
         const statusBtn = document.createElement("button");
         statusBtn.textContent = "Status";
+        statusBtn.addEventListener("click", changeBookStatus);
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
         btnsDiv.appendChild(statusBtn);
@@ -126,31 +169,6 @@ function addBooksToDisplay() {
 
         bookDisplay.appendChild(bookCardDiv);
     });
-}
-
-
-
-
-    bookCards.forEach(li => {
-        const liText = li.textContent;
-        const currentLiBookID = parseInt(liText.slice(liText.length - 1));
-        console.log(currentLiBookID);
-    })
-
-
-function checkBooksDisplayStatus(arrayBookId) {
-    const bookId = bookId;
-    let bookCards = Array.from(document.querySelectorAll(".book-id"));
-    
-    bookCards.forEach(li => {
-        const liText = li.textContent;
-        const currentLiBookID = parseInt(liText.slice(liText.length - 1));
-        if (bookId === currentLiBookID) {
-            return true;
-        }
-    });
-
-    return false;
 }
 
 //This is the display button with eventlistener
@@ -164,3 +182,4 @@ function displayBookToLibrary (e) {
     e.preventDefault();
     addBooksToDisplay();
 }
+

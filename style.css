@@ -108,10 +108,21 @@ body {
     list-style: none;
 }
 
-.status-display.read {
-    border: 0.3rem dashed green;
+.status-display {
     padding: 0.5rem 3rem;
     margin-top: 1rem;
+}
+
+.not-read {
+    border: 0.3rem dashed firebrick;
+}
+
+.in-progress {
+    border: 0.3rem dashed #D6C229;
+}
+
+.read {
+    border: 0.3rem dashed seagreen;
 }
 
 .book-card-btns {
