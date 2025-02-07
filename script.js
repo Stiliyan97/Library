@@ -53,11 +53,11 @@ function addBookToArray() {
 function checkBooksDisplayStatus(arrayBookId) {
     const bookId = arrayBookId;
     let bookCards = Array.from(document.querySelectorAll(".book-id"));
+    console.log(bookCards);
     let isBookDisplayed = false;
 
-    bookCards.forEach(li => {
-        const liText = li.textContent;
-        const currentLiBookID = parseInt(liText.slice(liText.length - 1));
+    bookCards.forEach(id => {
+        const currentLiBookID = parseInt(id.textContent);
         if (bookId === currentLiBookID) {
             isBookDisplayed = true;
         }
@@ -96,9 +96,13 @@ function deleteBook(e) {
                             .parentElement
                             .previousSibling
                             .previousSibling
-                            .children[3].textContent;
+                            .children[3]
+                            .children[0]
+                            .textContent;
+                            
+    console.log(currentBookIdText);
     
-    const currentBookId = parseInt(currentBookIdText.slice(currentBookIdText.length - 1));
+    const currentBookId = parseInt(currentBookIdText);
     
     myLibrary = myLibrary.filter(book => book.id !== currentBookId);
 
@@ -143,8 +147,12 @@ function addBooksToDisplay() {
                     bookDetailsLi.textContent = `Pages: ${book.pages}`;
                     break;
                 case 4:
-                    bookDetailsLi.textContent = `ID: ${book.id}`;
-                    bookDetailsLi.classList.add("book-id");
+                    bookDetailsLi.textContent = `ID: `;
+                    const bookIdSpan = document.createElement("span");
+                    bookIdSpan.textContent = `${book.id}`;
+                    bookIdSpan.classList.add("book-id");
+                    bookDetailsLi.appendChild(bookIdSpan);
+                    console.log(bookDetailsLi);
                     break;
                 default:
                     break;
