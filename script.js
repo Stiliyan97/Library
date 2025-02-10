@@ -68,7 +68,7 @@ function checkBooksDisplayStatus(arrayBookId) {
 
 //This func changes the book cards status
 
-function changeBookStatus(e) {
+Book.prototype.changeBookStatus = function(e) {
     e.preventDefault();
 
     const statusPara = e.target.parentElement.previousSibling;
@@ -122,6 +122,7 @@ function addBooksToDisplay() {
         if(checkBooksDisplayStatus(book.id)){
             return;
         }
+        console.log(book);
         // creates the book-card div and adds the class
         const bookCardDiv = document.createElement("div");
         bookCardDiv.classList.add("book-card");
@@ -173,7 +174,7 @@ function addBooksToDisplay() {
         btnsDiv.classList.add("book-card-btns");
         const statusBtn = document.createElement("button");
         statusBtn.textContent = "Status";
-        statusBtn.addEventListener("click", changeBookStatus);
+        statusBtn.addEventListener("click",book.changeBookStatus);
         const deleteBtn = document.createElement("button");
         deleteBtn.textContent = "Delete";
         deleteBtn.addEventListener("click", deleteBook);
